@@ -5,6 +5,7 @@ import requests
 import debug
 from datetime import datetime
 from debug import debug_print
+from util import clean_text
 
 def collect_args():
     parser = argparse.ArgumentParser()
@@ -51,8 +52,8 @@ def write_query_result(file_handle, response_json, start = 1):
         start + int(response_json['queries']['request'][0]['count']) - 1))
     index = 0
     for item in response_json['items']:
-        file_handle.write('\tTitle: {}\n'.format(item['title']))
-        file_handle.write('\tSnippet: {}\n'.format(item['snippet']))
+        file_handle.write('\tTitle: {}\n'.format(clean_text(item['title'])))
+        file_handle.write('\tSnippet: {}\n'.format(clean_text(item['snippet'])))
         file_handle.write('\tLink: {}\n'.format(item['link']))
         file_handle.write('\tResult number: {}\n'.format(start + index))
         index += 1

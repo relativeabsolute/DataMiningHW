@@ -8,6 +8,7 @@ import urllib.parse
 from string import printable
 from pathlib import Path
 from debug import debug_print
+from util import clean_text
 from requests_oauthlib import OAuth1
 
 auth_code = ''
@@ -30,10 +31,6 @@ query_descriptions = {
     'from' : 'Search for tweets authored by someone',
     'to' : 'Search for tweets in reply to someone',
     'at' : 'Search for tweets mentioning someone' }
-
-def clean_text(text):
-    s = "".join(c for c in text if c in printable)
-    return ' '.join(s.split())
 
 def make_query(original, query_type):
     return query_types[query_type].format(original)
