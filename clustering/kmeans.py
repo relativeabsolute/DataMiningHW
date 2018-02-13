@@ -32,11 +32,6 @@ def assign_clusters(data, means, distance_calc):
 def get_means(clusters):
     return [[sum(x) / len(cluster) for x in zip(*cluster)] if len(cluster) > 1 else cluster[0] for cluster in clusters]
 
-# there are definitely more exact ways to calculate this but this should be good enough
-# clusters must be sorted by length for correct results!
-def has_converged(prev_clusters, clusters):
-    return len(prev_clusters) == len(clusters) and all(len(prev_clusters[i]) == len(clusters[i]) for i in range(len(clusters)))
-
 # use for lists of indices
 # assumed that prev_clusters and clusters are each the same length
 # since each item of data will be assigned to a cluster
