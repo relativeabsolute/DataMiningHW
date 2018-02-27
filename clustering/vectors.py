@@ -27,7 +27,7 @@ def min_max_normalize(vector):
     min_item = min(vector)
     max_item = max(vector)
     delta = max_item - min_item
-    return [(x - min_item) / delta for x in vector]
+    return [float(x - min_item) / delta for x in vector]
 
 def ordinal_normalize(vector, order):
     order_dict = {item[1] : item[0] for item in enumerate(order)}
@@ -40,3 +40,6 @@ def normalized_euclidean_distance(first, second, weights):
     if len(first) != len(second) or len(first) != len(weights):
         raise IndexError
     return math.sqrt(sum(weights[i] * (first[i] - second[i]) ** 2 for i in range(len(first)))) / math.sqrt(sum(weights))
+
+def get_columns(data, column_indices):
+    return [[row[i] for row in data] for i in column_indices]
