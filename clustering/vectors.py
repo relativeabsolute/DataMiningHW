@@ -15,8 +15,12 @@ def cosine(first, second):
 def jaccard_similarity_coefficient(first, second):
     if len(first) != len(second):
         raise IndexError
-    return float(sum(1 if first[i] and second[i] else 0 for i in range(len(first)))) / sum(1 if first[i] or second[i] else 0 for i in range(len(first)))
-
+    result = 0.0
+    try:
+        result = float(sum(1 if first[i] and second[i] else 0 for i in range(len(first)))) / sum(1 if first[i] or second[i] else 0 for i in range(len(first)))
+    except:
+        pass
+    return result
 # used to measure similarity of symmetric binary data or categorical data
 def simple_matching_coefficient(first, second):
     if len(first) != len(second):
@@ -28,6 +32,16 @@ def min_max_normalize(vector):
     max_item = max(vector)
     delta = max_item - min_item
     return [float(x - min_item) / delta for x in vector]
+
+# vector is a vector of vectors
+# [[0], [1], [2], etc]
+def min_max_normalize_v(vector):
+    numbers = [item[0] for item in vector]
+    return min_max_normalize(numbers)
+
+def ordinal_normalize_num(item, order):
+    order_dict = {item[1] : item[0] for item in enumerate(order)}
+    return order_dict[item] / float(len(order) - 1)
 
 def ordinal_normalize(vector, order):
     order_dict = {item[1] : item[0] for item in enumerate(order)}
@@ -42,4 +56,7 @@ def normalized_euclidean_distance(first, second, weights):
     return math.sqrt(sum(weights[i] * (first[i] - second[i]) ** 2 for i in range(len(first)))) / math.sqrt(sum(weights))
 
 def get_columns(data, column_indices):
-    return [[row[i] for row in data] for i in column_indices]
+    return [[row[i] for i in column_indices] for row in data]
+
+def get_columns_lambda(data, column_indices, func):
+    return [[func(row[i]) for i in column_indices] for row in data]
