@@ -1,8 +1,7 @@
 import requests
-from ccc_key import ccc_credentials
+from config import *
 
 #coin_codes = ['BTC', 'ETH', 'XRP', 'BCH', 'LTC', 'EOS', 'ADA', 'XLM', 'NEO', 'MIOTA' ]
-coin_names = ['Bitcoin', 'Ethereum', 'Ripple', 'Bitcoin Cash', 'Litecoin', 'EOS', 'Cardano', 'Stellar', 'NEO', 'IOTA']
 
 def init():
     r = requests.get('https://www.cryptocurrencychart.com/api/coin/list',
