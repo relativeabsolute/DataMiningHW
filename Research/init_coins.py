@@ -10,8 +10,12 @@ def init():
         coins = [coin for coin in r.json()['coins'] if coin['name'] in coin_names]
         with open('coins.py', 'w') as coin_ids:
             coin_ids.write('coin_ids = [')
-            for coin in coins:
-                coin_ids.write('{}\n'.format(str(coin)))
+            for i in range(len(coins)):
+                maybe_comma = ''
+                to_write = '{}{}\n'
+                if i != len(coins) - 1:
+                    maybe_comma = ','
+                coin_ids.write(to_write.format(str(coin), maybe_comma))
             coin_ids.write(']')
             coin_ids.flush()
     else:

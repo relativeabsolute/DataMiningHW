@@ -5,3 +5,6 @@ twitter_auth.txt
 twitter
 
 *.csv
+*.pyc
+*.swp
+*.db
